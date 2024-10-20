@@ -14,7 +14,7 @@ def create(sender, message_text, vector):
     vector_str = ','.join(str(x) for x in vector)
     with connect() as conn:
         with conn.cursor() as cursor:
-            query = "INSERT INTO Messages (Sender, MessageText, Vector) VALUES (?, ?)"
+            query = "INSERT INTO Messages (Sender, MessageText, Vector) VALUES (?, ?, ?)"
             cursor.execute(query, (sender, message_text, vector_str))
             conn.commit()
             

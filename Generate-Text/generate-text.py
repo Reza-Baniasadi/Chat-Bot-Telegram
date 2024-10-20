@@ -8,7 +8,6 @@ from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filte
 import nest_asyncio
 import logging
 import os
-from dotenv import load_dotenv
 
 
 nest_asyncio.apply()
@@ -88,5 +87,4 @@ async def handle_message(update, context):
 app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-print("🤖 ربات آماده است...")
 app.run_polling()

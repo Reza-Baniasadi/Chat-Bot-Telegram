@@ -28,7 +28,7 @@ tokenizer_question.fit_on_texts(question)
 total_words = len(tokenizer_question.word_index) + 1
 numberWordq = tokenizer_question.texts_to_sequences(question)
 max_lenght = max(len(number) for number in numberWordq)
-encoder_input_data = pad_sequences(numberWordq,maxlen = max_lenght, padding = 'post')
+encoder_input_data = pad_sequences(numberWordq,maxlen = max_lenght)
 
 
 tokenizer_answer = Tokenizer()

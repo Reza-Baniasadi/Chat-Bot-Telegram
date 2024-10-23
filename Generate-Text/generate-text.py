@@ -74,7 +74,7 @@ def generate_answer(seed_text, max_words=20):
         if output_word == '':
             break
         seed_text += ' ' + output_word
-        if output_word == 'پاسخ':
+        if output_word == ' ':
             break
     return seed_text
 

@@ -23,6 +23,8 @@ ansewer = [ansewer for question ,ansewer, in pairs]
 
 ansewer = ['startseq' + a + 'endseq'  for a in ansewer]
 
+print(ansewer[24])
+
 tokenizer_question = Tokenizer()
 tokenizer_question.fit_on_texts(question)
 total_words = len(tokenizer_question.word_index) + 1

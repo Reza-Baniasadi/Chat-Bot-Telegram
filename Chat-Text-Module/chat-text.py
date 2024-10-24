@@ -27,6 +27,8 @@ class ChatBot:
 
         y = np.array(df['answer'])
 
+        print(y)
+
         x_train, x_test, y_train, y_test = train_test_split(self.embeddings, y, test_size=0.2, random_state=42)
 
         self.model = Sequential([

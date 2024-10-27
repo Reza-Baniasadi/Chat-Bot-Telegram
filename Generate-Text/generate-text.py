@@ -1,11 +1,9 @@
 import json
 import numpy as np
 import tensorflow as tf
-from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
-import nest_asyncio
 import logging
 import os
 

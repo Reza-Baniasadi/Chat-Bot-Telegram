@@ -6,11 +6,14 @@ from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import Normalizer
 
 
-class chatBot :
-    def __init__(self,dataset_loader):
+class ChatBot :
+    def __init__(self):
 
-        self.dataset = dataset_loader.load('Kamtera/Persian-conversational-dataset')
-        text = [item['text'] for item in self.dataset['train']]
+        self.dataset = load_dataset('Kamtera/Persian-conversational-dataset',trust_remote_code=True)
+        print('ddddddddddd',self.dataset['train'][0])
+        text = [item['question'] for item in self.dataset['train']]
+
+
 
         model = SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2')
         embedding = model.encode(text,show_progress_bar=True)   
@@ -19,5 +22,11 @@ class chatBot :
         normalize = Normalizer() 
         normalize = normalize.fit_transform(embedding)
         
-        print(normalize.shape)
-        
+        print("تعداد جملات:", len(text))
+        print("شکل embedding ها:", embedding.shape)
+        print("نمونه بردار embedding جمله اول (۱۰ مقدار اول):", embedding[0][:10])  
+               
+if __name__ == "__main__":
+     chatbot = ChatBot()
+
+ 

@@ -1,32 +1,51 @@
+import json
 import pandas as pd
-import numpy as np
-from datasets import load_dataset
 import tensorflow as tf
-from sentence_transformers import SentenceTransformer
+import numpy as np
 from sklearn.preprocessing import Normalizer
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, LeakyReLU
+from sklearn.model_selection import train_test_split
 
-
-class ChatBot :
+class ChatBot:
     def __init__(self):
-
-        self.dataset = load_dataset('Kamtera/Persian-conversational-dataset',trust_remote_code=True)
-        print('ddddddddddd',self.dataset['train'][0])
-        text = [item['question'] for item in self.dataset['train']]
+        with open('/Users/mac/Documents/Chat-Bot-Telegram/dadrah_dataset1-100000_276342.json', 'r', encoding='utf-8') as f:
+            data = json.load(f)
 
 
+        print('sssscscscscscscs',data[3])
+        for rowansewer in data :
+            y_train = self.model.encode(rowansewer[2])
 
-        model = SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2')
-        embedding = model.encode(text,show_progress_bar=True)   
-
-
-        normalize = Normalizer() 
-        normalize = normalize.fit_transform(embedding)
-        
-        print("تعداد جملات:", len(text))
-        print("شکل embedding ها:", embedding.shape)
-        print("نمونه بردار embedding جمله اول (۱۰ مقدار اول):", embedding[0][:10])  
-               
-if __name__ == "__main__":
-     chatbot = ChatBot()
-
+        rows = [[row[1], row[2][0] if isinstance(row[2], list) else row[2]] for row in data]
+        df = pd.DataFrame(rows, columns=["question", "answer"])
  
+       
+        self.embeddings = np.load('/Users/mac/Documents/Chat-Bot-Telegram/embeddings.npy')
+        self.embeddings = Normalizer().fit_transform(self.embeddings)
+
+        print("✅ شکل embedding‌ها:", self.embeddings.shape)
+
+        y = np.array(df['answer'])
+
+        x_train, x_test, y_train, y_test = train_test_split(self.embeddings, y, test_size=0.2, random_state=42)
+
+        self.model = Sequential([
+            Dense(126, input_shape=(384,)),
+            LeakyReLU(alpha=0.01),
+
+            Dense(32),
+            LeakyReLU(alpha=0.01),
+
+            Dense(126),
+            LeakyReLU(alpha=0.01),
+
+            Dense(384, activation='sigmoid') 
+        ])
+
+        self.model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+        self.model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=10, batch_size=32)
+
+if __name__ == "__main__":
+    chatbot = ChatBot()

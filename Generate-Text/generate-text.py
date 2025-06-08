@@ -3,7 +3,7 @@ import numpy as np
 import tensorflow as tf
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
+from telegram.ext import ApplicationBuilder, MessageHandler, filters
 import logging
 import os
 
@@ -23,7 +23,6 @@ ansewer = [ansewer for _ ,ansewer, in pairs]
 
 ansewer = ['startseq' + a + 'endseq'  for a in ansewer]
 
-print(ansewer[24])
 
 tokenizer_question = Tokenizer()
 tokenizer_question.fit_on_texts(question)

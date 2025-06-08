@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 USE_PROXY = os.getenv("USE_PROXY", "false").lower() == "true"
-PROXY_URL = os.getenv("PROXY_URL", "socks5h://127.0.0.1:9050")
+PROXY_URL = os.getenv("PROXY_URL", "socks5h://127.0.0.1:3000")
 
 model = YOLO("yolov8n.pt")
 

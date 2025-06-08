@@ -1,5 +1,5 @@
 from telegram.ext import Updater, MessageHandler, Filters
-from telegram import File, Bot
+from telegram import  Bot
 from telegram.utils.request import Request
 from ultralytics import YOLO
 import os
@@ -12,8 +12,7 @@ PROXY_URL = os.getenv("PROXY_URL", "socks5h://127.0.0.1:9050")
 
 model = YOLO("yolov8n.pt")
 
-def handle_photo(update, context):
-    print("📸 عکس دریافت شد!")
+def handle_photo(update, ):
     photo = update.message.photo[-1].get_file()
     file_path = "received.jpg"
     photo.download(file_path)

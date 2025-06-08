@@ -18,8 +18,8 @@ with open('/content/dadrah_dataset1-100000_276342.json', 'r', encoding='utf-8') 
 
 pairs = [(row[1], row[2][0] if isinstance(row[2], list) else row[2]) for row in data]
 
-question = [question for question , answer in pairs]
-ansewer = [ansewer for question ,ansewer, in pairs]
+question = [question for question  in pairs]
+ansewer = [ansewer for _ ,ansewer, in pairs]
 
 ansewer = ['startseq' + a + 'endseq'  for a in ansewer]
 

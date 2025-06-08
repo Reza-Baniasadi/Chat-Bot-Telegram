@@ -17,7 +17,7 @@ class MongoDb:
         
 
     def findByQuestion(self,question_text):
-        return self.collection.find_one({'question':question_text}, {"_id": 0})
+        return self.collection.find_one({'question':question_text})
 
 
 

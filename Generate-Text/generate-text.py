@@ -78,7 +78,7 @@ def generate_answer(seed_text, max_words=20):
     return seed_text
 
 
-async def handle_message(update, context):
+async def handle_message(update):
     user_input = update.message.text
     response = generate_answer(f"سوال: {user_input}")
     await update.message.reply_text(response)

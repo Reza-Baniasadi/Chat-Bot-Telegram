@@ -45,7 +45,7 @@ class ChatBot:
 
         self.model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-        self.model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=25, batch_size=32)
+        self.model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=28, batch_size=32)
 
 if __name__ == "__main__":
     chatbot = ChatBot()

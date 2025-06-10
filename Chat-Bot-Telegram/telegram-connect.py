@@ -7,8 +7,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
-USE_PROXY = os.getenv("USE_PROXY", "false").lower() == "true"
-PROXY_URL = os.getenv("PROXY_URL", "socks5h://127.0.0.1:3000")
 
 model = YOLO("yolov8n.pt")
 
@@ -31,7 +29,7 @@ def handle_photo(update, ):
 
 def main():
     if USE_PROXY:
-        req = Request(proxy_url=PROXY_URL)
+        req = Request(proxy_url)
         bot = Bot(token=TELEGRAM_TOKEN, request=req)
     else:
         bot = Bot(token=TELEGRAM_TOKEN)

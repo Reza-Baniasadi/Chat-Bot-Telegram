@@ -28,11 +28,6 @@ def handle_photo(update, ):
     os.remove(file_path)
 
 def main():
-    if USE_PROXY:
-        req = Request(proxy_url)
-        bot = Bot(token=TELEGRAM_TOKEN, request=req)
-    else:
-        bot = Bot(token=TELEGRAM_TOKEN)
 
     updater = Updater(bot=bot)
     dp = updater.dispatcher

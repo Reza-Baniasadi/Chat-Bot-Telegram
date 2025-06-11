@@ -37,7 +37,7 @@ class ChatBot:
             Dense(32),
             LeakyReLU(alpha=0.01),
 
-            Dense(128),
+            Dense(136),
             LeakyReLU(alpha=0.01),
 
             Dense(384, activation='sigmoid') 

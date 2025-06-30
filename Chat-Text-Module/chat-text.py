@@ -37,7 +37,7 @@ class ChatBot:
             Dense(32),
             LeakyReLU(alpha=0.01),
 
-            Dense(126),
+            Dense(128),
             LeakyReLU(alpha=0.01),
 
             Dense(384, activation='sigmoid') 
@@ -45,7 +45,7 @@ class ChatBot:
 
         self.model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-        self.model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=20, batch_size=32)
+        self.model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=25, batch_size=32)
 
 if __name__ == "__main__":
     chatbot = ChatBot()

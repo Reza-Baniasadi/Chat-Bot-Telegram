@@ -24,9 +24,15 @@ pairs = [(row[1], row[2][0] if isinstance(row[2], list) else row[2]) for row in 
 question = [question for question , answer in pairs]
 ansewer = [ansewer for question ,ansewer, in pairs]
 
-tokenizer = Tokenizer()
-tokenizer.fit_on_texts(texts)
-total_words = len(tokenizer.word_index) + 1
+ansewer = ['startseq' + a + 'endseq'  for a in ansewer]
+
+tokenizer_question = Tokenizer()
+tokenizer_question.fit_on_texts(question)
+total_words = len(tokenizer_question.word_index) + 1
+numberWord = tokenizer_question.texts_to_sequences(question)
+
+
+
 
 input_sequences = []
 for text in texts:

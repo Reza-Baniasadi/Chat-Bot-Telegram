@@ -20,7 +20,9 @@ with open('/content/dadrah_dataset1-100000_276342.json', 'r', encoding='utf-8') 
     data = json.load(f)
 
 pairs = [(row[1], row[2][0] if isinstance(row[2], list) else row[2]) for row in data]
-texts = [f"سوال: {q} پاسخ: {a}" for q, a in pairs]
+
+question = [question for question , answer in pairs]
+ansewer = [ansewer for question ,ansewer, in pairs]
 
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts(texts)

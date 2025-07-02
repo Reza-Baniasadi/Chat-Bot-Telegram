@@ -29,12 +29,17 @@ ansewer = ['startseq' + a + 'endseq'  for a in ansewer]
 tokenizer_question = Tokenizer()
 tokenizer_question.fit_on_texts(question)
 total_words = len(tokenizer_question.word_index) + 1
-numberWord = tokenizer_question.texts_to_sequences(question)
-max_lenght = max(len(number) for number in numberWord)
-encoder_input = pad_sequences(numberWord,max_lenght = max_lenght, padding = 'post')
+numberWordq = tokenizer_question.texts_to_sequences(question)
+max_lenght = max(len(number) for number in numberWordq)
+encoder_input_question = pad_sequences(numberWordq,maxlen = max_lenght, padding = 'post')
 
 
-
+tokenizer_answer = Tokenizer()
+tokenizer_answer.fit_on_texts(ansewer)
+total_word_answer =  len(tokenizer_answer.word_index) + 1
+numberWorda = tokenizer_answer.texts_to_sequence(ansewer)
+maxlen_answer  = max(len(sentence) for sentence in numberWorda )
+encode_input_answer = pad_sequences( numberWorda , maxlen = maxlen_answer,padding = ' post')
 
 input_sequences = []
 for text in texts:

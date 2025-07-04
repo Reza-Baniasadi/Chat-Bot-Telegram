@@ -31,7 +31,7 @@ tokenizer_question.fit_on_texts(question)
 total_words = len(tokenizer_question.word_index) + 1
 numberWordq = tokenizer_question.texts_to_sequences(question)
 max_lenght = max(len(number) for number in numberWordq)
-encoder_input_question = pad_sequences(numberWordq,maxlen = max_lenght, padding = 'post')
+encoder_input_data = pad_sequences(numberWordq,maxlen = max_lenght, padding = 'post')
 
 
 tokenizer_answer = Tokenizer()
@@ -39,7 +39,11 @@ tokenizer_answer.fit_on_texts(ansewer)
 total_word_answer =  len(tokenizer_answer.word_index) + 1
 numberWorda = tokenizer_answer.texts_to_sequence(ansewer)
 maxlen_answer  = max(len(sentence) for sentence in numberWorda )
-encode_input_answer = pad_sequences( numberWorda , maxlen = maxlen_answer,padding = ' post')
+decoder_input_data = pad_sequences( numberWorda , maxlen = maxlen_answer,padding = ' post')
+
+
+data_target = np.zero_like([decoder_input_data])
+data_target[:,:-1] =  decoder_input_data[:,1:]
 
 input_sequences = []
 for text in texts:

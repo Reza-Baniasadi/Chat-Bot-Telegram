@@ -7,17 +7,17 @@ class MongoDb:
         self.collection = self.db[collection_name]
 
 
-        def insert_question(self,question:str,vector:list):
-            data = {"question": question, "vector": vector}
-            self.collection.insert_one(data)
+    def insert_question(self,question:str,vector:list):
+        data = {"question": question, "vector": vector}
+        self.collection.insert_one(data)
 
         
-        def get_all_question(self):
-            return list(self.collection.find({}, {"_id": 0}))
+    def get_all_question(self):
+        return list(self.collection.find({}, {"_id": 0}))
         
 
-        def findByQuestion(self,question_text):
-            self.collection({'question':question_text})
+    def findByQuestion(self,question_text):
+        return self.collection.find_one({'question':question_text}, {"_id": 0})
 
 
 

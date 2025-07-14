@@ -7,5 +7,10 @@ class MongoDb:
         self.collection = self.db[collection_name]
 
 
+        def insert_question(self,question:str,vector:list):
+            data = {"question": question, "vector": vector}
+            self.collection.insert_one(data)
+
+
 
 

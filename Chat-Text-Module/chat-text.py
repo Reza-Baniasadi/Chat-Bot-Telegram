@@ -24,7 +24,7 @@ class ChatBot:
         self.embeddings = np.load('/Users/mac/Documents/Chat-Bot-Telegram/embeddings.npy')
         self.embeddings = Normalizer().fit_transform(self.embeddings)
 
-        print("✅ شکل embedding‌ها:", self.embeddings.shape)
+        print(self.embeddings.shape)
 
         y = np.array(df['answer'])
 

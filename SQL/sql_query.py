@@ -26,4 +26,11 @@ def update(record_id, new_text, table_name):
     cursor.close()
     conn.close()
 
-
+def delete(record_id, table_name):
+    conn = connect()
+    cursor = conn.cursor()
+    query = f"DELETE FROM {table_name} WHERE id = ?"
+    cursor.execute(query, (record_id,))
+    conn.commit()
+    cursor.close()
+    conn.close()

@@ -13,8 +13,10 @@ def connect():
 def create(sender, message_text, vector):
     conn = connect()
     cursor = conn.cursor()
+    # تبدیل آرایه به رشته با کاما جدا شده
+    vector_str = ','.join(str(x) for x in vector)
     query = "INSERT INTO Messages (Sender, MessageText, Vector) VALUES (?, ?, ?)"
-    cursor.execute(query, (sender, message_text, vector))
+    cursor.execute(query, (sender, message_text, vector_str))
     conn.commit()
     cursor.close()
     conn.close()
@@ -27,7 +29,8 @@ def read_all():
     rows = cursor.fetchall()
     result = []
     for row in rows:
-        vector = json.loads(row.Vector) if row.Vector else None
+        # تبدیل رشته کاما جدا شده به لیست float
+        vector = [float(x) for x in row.Vector.split(',')] if row.Vector else None
         result.append({
             "Id": row.Id,
             "Sender": row.Sender,
@@ -45,7 +48,7 @@ def read_by_id(record_id):
     cursor.execute(query, (record_id,))
     row = cursor.fetchone()
     if row:
-        vector = row.Vector if row.Vector else None
+        vector = [float(x) for x in row.Vector.split(',')] if row.Vector else None
         result = {
             "Id": row.Id,
             "Sender": row.Sender,
@@ -72,9 +75,9 @@ def update(record_id, new_sender=None, new_message_text=None, new_vector=None):
         fields.append("MessageText = ?")
         params.append(new_message_text)
     if new_vector is not None:
-        vector_json = json.dumps(new_vector)
+        vector_str = ','.join(str(x) for x in new_vector)
         fields.append("Vector = ?")
-        params.append(vector_json)
+        params.append(vector_str)
 
     if not fields:
         cursor.close()

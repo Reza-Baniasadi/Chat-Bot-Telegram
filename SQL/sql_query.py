@@ -11,15 +11,13 @@ def connect():
     )
 
 def create(sender, message_text, vector):
-    conn = connect()
-    cursor = conn.cursor()
-    # تبدیل آرایه به رشته با کاما جدا شده
     vector_str = ','.join(str(x) for x in vector)
-    query = "INSERT INTO Messages (Sender, MessageText, Vector) VALUES (?, ?, ?)"
-    cursor.execute(query, (sender, message_text, vector_str))
-    conn.commit()
-    cursor.close()
-    conn.close()
+    with connect() as conn:
+        with conn.cursor() as cursor:
+            query = "INSERT INTO Messages (Sender, MessageText, Vector) VALUES (?, ?, ?)"
+            cursor.execute(query, (sender, message_text, vector_str))
+            conn.commit()
+            
 
 def read_all():
     conn = connect()

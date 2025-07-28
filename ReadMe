@@ -23,3 +23,9 @@
 !sudo dpkg -i --force-overwrite odbcinst_2.3.11-1_amd64.deb
 !sudo dpkg -i --force-overwrite odbcinst1debian2_2.3.11-1_amd64.deb
 !sudo dpkg -i --force-overwrite libodbc1_2.3.11-1_amd64.deb
+
+#sql linux command
+
+!sudo apt install -y unixodbc unixodbc-dev
+
+!sudo ACCEPT_EULA=Y apt install -y msodbcsql17

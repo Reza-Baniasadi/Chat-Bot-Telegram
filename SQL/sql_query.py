@@ -20,24 +20,27 @@ def create(sender, message_text, vector):
             
 
 def read_all():
-    conn = connect()
+    conn = connect()  
     cursor = conn.cursor()
     query = "SELECT Id, Sender, MessageText, Vector FROM Messages"
     cursor.execute(query)
     rows = cursor.fetchall()
+
     result = []
     for row in rows:
-        # تبدیل رشته کاما جدا شده به لیست float
-        vector = [float(x) for x in row.Vector.split(',')] if row.Vector else None
+        row_id, sender, message_text, vector_str = row
+        vector = [float(x) for x in vector_str.split(',')] if vector_str else None
         result.append({
-            "Id": row.Id,
-            "Sender": row.Sender,
-            "MessageText": row.MessageText,
+            "Id": row_id,
+            "Sender": sender,
+            "MessageText": message_text,
             "Vector": vector
         })
+
     cursor.close()
     conn.close()
     return result
+
 
 def read_by_id(record_id):
     conn = connect()

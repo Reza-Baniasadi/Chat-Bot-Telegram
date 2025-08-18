@@ -44,7 +44,6 @@ def read_all():
 
 def read_by_id(record_id):
     conn = connect()
-    cursor = conn.cursor()
     curaor2 = conn.cursor()
     query = "SELECT Id, Sender, MessageText, Vector FROM Messages WHERE Id = ?"
     curaor2.execute(query, (record_id,))

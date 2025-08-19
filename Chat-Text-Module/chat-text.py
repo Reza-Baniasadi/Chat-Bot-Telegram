@@ -13,12 +13,12 @@ class ChatBot:
             data = json.load(f)
 
 
-        print('sssscscscscscscs',data[3])
+        print('sssscscscscscscs',data[6])
         for rowansewer in data :
             y_train = self.model.encode(rowansewer[2])
 
         rows = [[row[1], row[2][0] if isinstance(row[2], list) else row[2]] for row in data]
-        df = pd.DataFrame(rows, columns=["question", "answer"])
+        df = pd.DataFrame(rows, columns=["questions", "answer"])
  
        
         self.embeddings = np.load('/Users/mac/Documents/Chat-Bot-Telegram/embeddings.npy')
@@ -45,7 +45,7 @@ class ChatBot:
 
         self.model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-        self.model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=10, batch_size=32)
+        self.model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=20, batch_size=32)
 
 if __name__ == "__main__":
     chatbot = ChatBot()

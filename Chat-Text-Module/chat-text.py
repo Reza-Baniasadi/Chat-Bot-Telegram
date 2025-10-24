@@ -9,11 +9,10 @@ from sklearn.model_selection import train_test_split
 
 class ChatBot:
     def __init__(self):
-        with open('/Users/mac/Documents/Chat-Bot-Telegram/dadrah_dataset1-100000_276342.json', 'r', encoding='utf-8') as f:
+        with open('/Users/mac/Documents/Chat-Bot-Telegram', 'r', encoding='utf-8') as f:
             data = json.load(f)
 
 
-        print('sssscscscscscscs',data[6])
         for rowansewer in data :
             y_train = self.model.encode(rowansewer[2])
 

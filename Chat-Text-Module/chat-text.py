@@ -13,6 +13,7 @@ class ChatBot:
             data = json.load(f)
 
 
+        print('sssscscscscscscs',data[6])
         for rowansewer in data :
             y_train = self.model.encode(rowansewer[2])
 
